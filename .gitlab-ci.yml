@@ -7,8 +7,9 @@ build:
   stage: build
   script:
     - docker build -t B simulation .#ui
-  schedule:
-    cron: "0 0 * * *"
+  triggers:
+    schedule:
+      cron: "0 0 * * *"
   
 
   artifacts:

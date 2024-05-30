@@ -12,7 +12,7 @@ Make sure you have a working Docker installation. You can download and install D
 
 1. **Clone this repository**:
    ```bash
-   git clone <your-forked-repository-url>
+   git clone <https://mygit.th-deg.de/sh04625/hpc-disease-simulation.git>
    ```
 
 2. **Navigate into the cloned repository**:

@@ -1,6 +1,5 @@
 #ifndef HPC_DISEASE_SIMULATION_H_
 #define HPC_DISEASE_SIMULATION_H_
-
 #endif // HPC_DISEASE_SIMULATION_H_
 
 #include <string>
@@ -12,7 +11,7 @@
 #include <fstream>
 #include <numeric>
 #include <valarray>
-#include "../include/INIReader.h"
+
 //class Person {};
 enum class State {
   Susceptible,
@@ -127,6 +126,10 @@ public:
   }
 
   void random_infection(const Disease& disease, int n) {
+//     if (people.empty()) {
+//       std::cout<<" exception...";
+//   return;
+// }
     for (int i = 0; i < n; ++i) {
       people[rand() % people.size()].infect(disease.duration);
     }
@@ -187,7 +190,11 @@ public:
 
 
   Population& select_random_population() {
+    // if (population.empty()) {
+    //   throw std::runtime_error("No populations in the world!");
+    // }
     int random_index = rand() % population.size();
+    // std::cout<<random_index<<std::endl;
     return population[random_index];
   }
 };
@@ -215,6 +222,5 @@ private:
     Disease disease;
     int simulation_run;
     std::string simulation_name;
-    
 };
 

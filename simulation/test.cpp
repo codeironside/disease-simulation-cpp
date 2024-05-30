@@ -2,4 +2,7 @@
 #include "../include/doctest.h"
 #include "simulation.h"
 
-TEST_CASE("Test simulation class") { Simulation sim = Simulation(); }
+TEST_CASE("Test Simulation class") {
+    Simulation sim;
+    CHECK(true); // A simple check to ensure tests are being executed
+}

@@ -1,19 +1,24 @@
 stages:
   - build
 
-image: docker:latest 
+image: docker:latest
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
 
 build:
   stage: build
   script:
-    - docker build -t B simulation .#ui
-  triggers:
-    schedule:
-      cron: "0 0 * * *"
-  
-
+    - docker build -t simulation .
+    - docker save simulation > simulation.tar
   artifacts:
     paths:
-      - docker-images/simulation.tar      
-      
-   
+      - simulation.tar
+    expire_in: 1 week

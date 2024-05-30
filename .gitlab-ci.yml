@@ -3,9 +3,9 @@ stages:
 
 image: docker:latest
 
-variables:
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: ""
+# variables:
+#   DOCKER_DRIVER: overlay2
+#   DOCKER_TLS_CERTDIR: ""
 
 services:
   - docker:dind

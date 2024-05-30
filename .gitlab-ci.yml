@@ -13,12 +13,27 @@ services:
 before_script:
   - docker info
 
-build:
+build_task1:
   stage: build
+  tags:
+    - simulation-tag
   script:
-    - docker build -t simulation .
-    - docker save simulation > simulation.tar
+    - docker build -t simulation:1 .
+    - docker save simulation:1 > simulation_task1.tar
   artifacts:
     paths:
-      - simulation.tar
+      - simulation_task1.tar
+    expire_in: 1 week
+
+build_task2:
+  stage: build
+  tags:
+    - simulation-tag
+  script:
+    - cd tasktwo
+    - docker build -t simulation:2 .
+    - docker save simulation:2 > simulation_task2.tar
+  artifacts:
+    paths:
+      - tasktwo/simulation_task2.tar
     expire_in: 1 week

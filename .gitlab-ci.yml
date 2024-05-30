@@ -1,0 +1,18 @@
+stages:
+  - build
+
+image: docker:latest 
+
+build:
+  stage: build
+  script:
+    - docker build -t B simulation .#ui
+  schedule:
+    cron: "0 0 * * *"
+  
+
+  artifacts:
+    paths:
+      - docker-images/simulation.tar      
+      
+   

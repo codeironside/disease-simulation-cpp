@@ -1,17 +1,55 @@
+
 # HPC Disease Simulation
-This is the template project for the HPC-05 Programming Lab project "Disease Simulation".
 
-> Please note that context and additional information on how this repository is to be used
-> is provided in the lectures!
+This project is designed for the HPC-05 Programming Lab, focusing on simulating the spread of diseases. 
 
-## Setup your own repository
-The following two steps shall be done by each student individually:
 
-1. Fork this repository
-2. Add the lecturer (christoph.schober@th-deg.de) with REPORTER role to your fork 
+## Prerequisites
 
-## Getting started with gitlab
+Make sure you have a working Docker installation. You can download and install Docker from [here](https://www.docker.com/products/docker-desktop).
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Cloning the Repository
 
-Already a pro? Just edit this README.md and make it your own.
+1. **Clone this repository**:
+   ```bash
+   git clone <your-forked-repository-url>
+   ```
+
+2. **Navigate into the cloned repository**:
+   ```bash
+   cd hpc-disease-simulation
+   ```
+
+## Building and Running the Simulation
+
+### Task 1
+
+1. **Build the Docker image for Task 1**:
+   ```bash
+   docker build . -t simulation:1
+   ```
+
+2. **Run the simulation for Task 1**:
+   ```bash
+   docker run --rm -it simulation:1
+   ```
+
+### Task 2 (Herd investigation)
+
+1. **Navigate to the Task 2 folder**:
+   ```bash
+   cd tasktwo
+   ```
+
+2. **Build the Docker image for Task 2**:
+   ```bash
+   docker build . -t simulation:2
+   ```
+
+3. **Run the simulation for Task 2**:
+   ```bash
+   docker run --rm -it simulation:2
+   ```
+
+
+

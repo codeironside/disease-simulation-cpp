@@ -63,26 +63,26 @@ build_task2:
 #   dependencies:
 #     - build_task2
 
-deploy:
-  stage: deploy
-  tags:
-    - simulation-tag
-  script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - docker tag simulation:1 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
-    - docker tag simulation:2 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
-    - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
-    - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
-  only:
-    - main
+# deploy:
+#   stage: deploy
+#   tags:
+#     - simulation-tag
+#   script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+#     - docker tag simulation:1 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
+#     - docker tag simulation:2 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
+#     - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
+#     - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
+#   only:
+#     - main
 
-nightly_build:
-  stage: build
-  tags:
-    - simulation-tag
-  script:
-    - docker build -t simulation:nightly .
-    - docker tag simulation:nightly $CI_REGISTRY/your-username/your-repository:nightly
-    - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:nightly
-  only:
-    - schedules
+# nightly_build:
+#   stage: build
+#   tags:
+#     - simulation-tag
+#   script:
+#     - docker build -t simulation:nightly .
+#     - docker tag simulation:nightly $CI_REGISTRY/your-username/your-repository:nightly
+#     - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:nightly
+#   only:
+#     - schedules

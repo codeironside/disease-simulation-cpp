@@ -43,7 +43,7 @@ build_task2:
   tags:
     - simulation-two
   script:
-    - cd tasktwo
+    - cd simulation/'task two'
     - docker build -t simulation:2 .
     - docker save simulation:2 > simulation_task2.tar
   artifacts:

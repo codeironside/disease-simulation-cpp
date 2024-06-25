@@ -18,7 +18,7 @@ before_script:
 build_task1:
   stage: build
   tags:
-    - simulation-tag
+    - simulation-one
   script:
     - docker build -t simulation:1 .
     - docker save simulation:1 > simulation_task1.tar
@@ -41,7 +41,7 @@ build_task1:
 build_task2:
   stage: build
   tags:
-    - simulation-tag
+    - simulation-two
   script:
     - cd tasktwo
     - docker build -t simulation:2 .

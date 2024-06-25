@@ -1,14 +1,16 @@
 stages:
   - build
+  - test
+  - deploy
 
 image: docker:latest
 
-# variables:
-#   DOCKER_DRIVER: overlay2
-#   DOCKER_TLS_CERTDIR: ""
-
 services:
   - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
 
 before_script:
   - docker info
@@ -25,6 +27,16 @@ build_task1:
       - simulation_task1.tar
     expire_in: 1 week
 
+test_task1:
+  stage: test
+  tags:
+    - simulation-tag
+  script:
+    - docker load -i simulation_task1.tar
+    - docker run simulation:1 ./run_tests.sh
+  dependencies:
+    - build_task1
+
 build_task2:
   stage: build
   tags:
@@ -37,3 +49,38 @@ build_task2:
     paths:
       - tasktwo/simulation_task2.tar
     expire_in: 1 week
+
+test_task2:
+  stage: test
+  tags:
+    - simulation-tag
+  script:
+    - cd tasktwo
+    - docker load -i simulation_task2.tar
+    - docker run simulation:2 ./run_tests.sh
+  dependencies:
+    - build_task2
+
+deploy:
+  stage: deploy
+  tags:
+    - simulation-tag
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker tag simulation:1 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
+    - docker tag simulation:2 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
+    - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
+    - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
+  only:
+    - main
+
+nightly_build:
+  stage: build
+  tags:
+    - simulation-tag
+  script:
+    - docker build -t simulation:nightly .
+    - docker tag simulation:nightly $CI_REGISTRY/your-username/your-repository:nightly
+    - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:nightly
+  only:
+    - schedules

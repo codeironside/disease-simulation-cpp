@@ -1,0 +1,6 @@
+key,value
+timesteps,16
+suceptiible_persons, 0
+recovered_persons, 15000
+ vaccinated_persons, 0
+

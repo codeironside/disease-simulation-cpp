@@ -149,4 +149,7 @@ void Simulation::start() {
     std::cout << "Number of vaccinated persons: " << num_vaccinated.back() << "\n";
     std::cout << "Number of recovered persons: " << num_recovered.back() << "\n";
     std::cout << "Number of susceptible persons: " << num_susceptible.back() << "\n";
+    std::cout << "standard deviation for vacinated: " << stddev_vaccinated << "\n";
+    std::cout << "standard deviation for recovered: " << stddev_recovered << "\n";
+    std::cout << "standard deviation for susciptible: " << stddev_susceptible << "\n";
 }

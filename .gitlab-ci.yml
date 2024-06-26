@@ -17,16 +17,17 @@ before_script:
 
 build_task1:
   stage: build
-  tags:
-    - simulation-one
+  # tags:
+  #   - simulation-one
   script:
-    - docker build -t simulation:1 .
-    - docker save simulation:1 > simulation_task1.tar
-  artifacts:
-    paths:
-      - simulation_task1.tar
-    expire_in: 1 week
-  timeout: 2h  # Increase timeout to 2 hours
+    - echo "task one running"
+  #   - docker build -t simulation:1 .
+  #   - docker save simulation:1 > simulation_task1.tar
+  # artifacts:
+  #   paths:
+  #     - simulation_task1.tar
+  #   expire_in: 1 week
+  # timeout: 2h  # Increase timeout to 2 hours
 
 # test_task1:
 #   stage: test
@@ -40,17 +41,18 @@ build_task1:
 
 build_task2:
   stage: build
-  tags:
-    - simulation-two
+  # tags:
+  #   - simulation-two
   script:
-    - cd simulation/'task two'
-    - docker build -t simulation:2 .
-    - docker save simulation:2 > simulation_task2.tar
-  artifacts:
-    paths:
-      - tasktwo/simulation_task2.tar
-    expire_in: 1 week
-  timeout: 2h  # Increase timeout to 2 hours
+    - echo "task two running"
+  #   - cd simulation/'task two'
+  #   - docker build -t simulation:2 .
+  #   - docker save simulation:2 > simulation_task2.tar
+  # artifacts:
+  #   paths:
+  #     - tasktwo/simulation_task2.tar
+  #   expire_in: 1 week
+  # timeout: 2h  # Increase timeout to 2 hours
 
 # test_task2:
 #   stage: test

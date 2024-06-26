@@ -21,8 +21,10 @@ build_task1:
   #   - simulation-one
   script:
     - echo "task one running"
-  #   - docker build -t simulation:1 .
-  #   - docker save simulation:1 > simulation_task1.tar
+    - docker build -t simulation:1 .
+    - docker save simulation:1 > simulation_task1.tar
+    - docker run --rm -it simulation:1
+    - echo "finished running simulation task 1"
   # artifacts:
   #   paths:
   #     - simulation_task1.tar

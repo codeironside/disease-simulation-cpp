@@ -3,7 +3,9 @@ stages:
   - test
   # - deploy
 
-image: docker:latest
+image: 
+  name: docker:latest
+  name: gcc:13.3
 
 services:
   - docker:dind

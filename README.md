@@ -33,6 +33,15 @@ Make sure you have a working Docker installation. You can download and install D
    ```bash
    docker run --rm -it simulation:1
    ```
+3. **build the test for Task 1**:
+   ```bash
+   g++ -o test_simulation test.cpp simulation.cpp
+   ```
+4. **Run the test for Task 1**:
+   ```bash
+   ./test_simulation
+   ```
+
 
 ### Task 2 (Herd investigation)
 

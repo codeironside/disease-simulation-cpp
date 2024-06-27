@@ -1,7 +1,7 @@
 stages:
   - build
-  # - test
-  - deploy
+  - test
+  # - deploy
 
 image: docker:latest
 
@@ -14,6 +14,7 @@ variables:
 
 before_script:
   - docker info
+  - gcc
 
 build_task1:
   stage: build
@@ -31,15 +32,13 @@ build_task1:
     expire_in: 1 week
   timeout: 2h  # Increase timeout to 2 hours
 
-# test_task1:
-#   stage: test
-#   tags:
-#     - simulation-tag
-#   script:
-#     - docker load -i simulation_task1.tar
-#     - docker run simulation:1 ./run_tests.sh
-#   dependencies:
-#     - build_task1
+test_task1:
+  stage: test
+  script:
+    - echo "Running tests for task one"
+    - g++ -o test_simulation test.cpp simulation.cpp
+    - ./test_simulation
+
 
 build_task2:
   stage: build

@@ -16,7 +16,7 @@ variables:
 
 before_script:
   - docker info
-  - gcc
+  - gcc info
 
 build_task1:
   stage: build

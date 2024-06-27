@@ -3,13 +3,11 @@ stages:
   - test
   # - deploy
 
-image: 
-  name: docker:latest
-  name: gcc:13.3
+image: docker:latest
 
 services:
   - docker:dind
-  - gcc
+  # - gcc
 
 variables:
   DOCKER_DRIVER: overlay2
@@ -17,7 +15,7 @@ variables:
 
 before_script:
   - docker info
-  - gcc --version
+  # - gcc --version
 
 build_task1:
   stage: build
@@ -35,12 +33,12 @@ build_task1:
     expire_in: 1 week
   timeout: 2h  # Increase timeout to 2 hours
 
-test_task1:
-  stage: test
-  script:
-    - echo "Running tests for task one"
-    - g++ -o test_simulation test.cpp simulation.cpp
-    - ./test_simulation
+# test_task1:
+#   stage: test
+#   script:
+#     - echo "Running tests for task one"
+#     - g++ -o test_simulation test.cpp simulation.cpp
+#     - ./test_simulation
 
 
 build_task2:

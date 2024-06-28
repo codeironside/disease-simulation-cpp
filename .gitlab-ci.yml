@@ -89,9 +89,16 @@ stages:
 
 image: gcc:latest
 
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
 before_script:
   - apt-get update
-  - apt-get install -y make cmake
+  - apt-get install -y docker.io
 
 build_task1:
   stage: build

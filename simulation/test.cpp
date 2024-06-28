@@ -29,8 +29,8 @@ TEST_CASE("Testing Person class")
 {
     REQUIRE(reader.ParseError() == 0);
 
-    int duration = reader.GetInteger("disease", "duration", -1);
-    double transmissibility = reader.GetReal("disease", "transmissability", -1.0);
+    int duration = reader.GetInteger("disease", "duration", 5);
+    double transmissibility = reader.GetReal("disease", "transmissability", 0.1);
     Disease disease("TestDisease", duration, transmissibility);
     Person person;
 
@@ -79,8 +79,8 @@ TEST_CASE("Testing Population class")
 {
     REQUIRE(reader.ParseError() == 0);
 
-    int population_size = reader.GetInteger("population_1", "size", -1);
-    double vaccination_rate = reader.GetReal("population_1", "vaccination_rate", -1.0);
+    int population_size = reader.GetInteger("population_1", "size", 4000);
+    double vaccination_rate = reader.GetReal("population_1", "vaccination_rate", 0.9);
     bool patient_0 = reader.GetBoolean("population_1", "patient_0", false);
 
     Population population;

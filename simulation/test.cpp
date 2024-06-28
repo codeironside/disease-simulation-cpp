@@ -1,24 +1,37 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../include/doctest.h"
 #include "simulation.h"
+#include "INIReader.h"
+
+INIReader reader("disease_in.ini");
 
 TEST_CASE("Testing Disease class")
 {
-    Disease disease("TestDisease", 5, 0.3);
+    REQUIRE(reader.ParseError() == 0);
 
-    INFO("Disease name should be TestDisease");
-    CHECK(disease.name == "TestDisease");
+    std::string disease_name = reader.Get("disease", "name", "UNKNOWN");
+    int duration = reader.GetInteger("disease", "duration", -1);
+    double transmissibility = reader.GetReal("disease", "transmissability", -1.0);
 
-    INFO("Disease duration should be 5");
-    CHECK(disease.duration == 5);
+    Disease disease(disease_name, duration, transmissibility);
 
-    INFO("Disease transmission probability should be 0.3");
-    CHECK(disease.transmission_probability == 0.3);
+    INFO("Disease name should be " << disease_name);
+    CHECK(disease.name == disease_name);
+
+    INFO("Disease duration should be " << duration);
+    CHECK(disease.duration == duration);
+
+    INFO("Disease transmission probability should be " << transmissibility);
+    CHECK(disease.transmission_probability == transmissibility);
 }
 
 TEST_CASE("Testing Person class")
 {
-    Disease disease("TestDisease", 5, 0.3);
+    REQUIRE(reader.ParseError() == 0);
+
+    int duration = reader.GetInteger("disease", "duration", -1);
+    double transmissibility = reader.GetReal("disease", "transmissability", -1.0);
+    Disease disease("TestDisease", duration, transmissibility);
     Person person;
 
     SUBCASE("Initial state should be Susceptible")
@@ -29,12 +42,12 @@ TEST_CASE("Testing Person class")
 
     SUBCASE("Infecting a person")
     {
-        person.infect(5);
+        person.infect(duration);
         INFO("State should be Infectious after infection");
         CHECK(person.state == State::Infectious);
 
-        INFO("Days sick should be 5 after infection");
-        CHECK(person.days_sick == 5);
+        INFO("Days sick should be " << duration << " after infection");
+        CHECK(person.days_sick == duration);
     }
 
     SUBCASE("Vaccinating a person")
@@ -55,7 +68,7 @@ TEST_CASE("Testing Person class")
     SUBCASE("Infecting another person")
     {
         Person otherPerson;
-        person.infect(5);
+        person.infect(duration);
         person.touch(otherPerson, disease);
         INFO("Other person's state should be Infectious after being touched by an infected person");
         CHECK(otherPerson.state == State::Infectious);
@@ -64,8 +77,14 @@ TEST_CASE("Testing Person class")
 
 TEST_CASE("Testing Population class")
 {
+    REQUIRE(reader.ParseError() == 0);
+
+    int population_size = reader.GetInteger("population_1", "size", -1);
+    double vaccination_rate = reader.GetReal("population_1", "vaccination_rate", -1.0);
+    bool patient_0 = reader.GetBoolean("population_1", "patient_0", false);
+
     Population population;
-    population.people.resize(100);
+    population.people.resize(population_size);
 
     SUBCASE("Initial counts should be zero")
     {
@@ -78,8 +97,8 @@ TEST_CASE("Testing Population class")
         INFO("Initial recovered count should be 0");
         CHECK(population.count_recovered() == 0);
 
-        INFO("Initial susceptible count should be 100");
-        CHECK(population.count_susceptible() == 100);
+        INFO("Initial susceptible count should be " << population_size);
+        CHECK(population.count_susceptible() == population_size);
     }
 
     SUBCASE("Random infection")
@@ -92,10 +111,10 @@ TEST_CASE("Testing Population class")
 
     SUBCASE("Random vaccination")
     {
-        population.vaccination_rate = 0.2;
+        population.vaccination_rate = vaccination_rate;
         population.random_vaccination();
-        INFO("Vaccinated count should be 20 after random vaccination");
-        CHECK(population.count_vaccinated() == 20);
+        INFO("Vaccinated count should be " << int(population_size * vaccination_rate) << " after random vaccination");
+        CHECK(population.count_vaccinated() == int(population_size * vaccination_rate));
     }
 
     SUBCASE("One more day")
@@ -144,11 +163,6 @@ TEST_CASE("Testing World class")
 TEST_CASE("Testing Simulation class")
 {
     Simulation simulation("disease_in.ini");
-
-    // SUBCASE("Initial simulation setup") {
-    //     INFO("Simulation name should be Test Simulation");
-    //     CHECK(simulation.simulation_name == "Test Simulation");
-    // }
 
     SUBCASE("Starting simulation")
     {

@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../include/doctest.h"
 #include "simulation.h"
-#include "INIReader.h"
+#include "../include/INIReader.h"
 
 INIReader reader("disease_in.ini");
 

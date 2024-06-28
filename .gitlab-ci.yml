@@ -34,7 +34,7 @@ test_task1:
   stage: test
   script:
     - echo "Running tests for task one"
-    - g++ -o test_simulation test.cpp simulation.cpp
+    - g++ -o test_simulation simulation/test.cpp simulation/simulation.cpp
     - ./test_simulation
   dependencies:
     - build_task1

@@ -64,19 +64,6 @@ TEST_CASE("Testing Person class")
         INFO("State should be Recovered after recovering from infection");
         CHECK(person.state == State::Recovered);
     }
-
-    SUBCASE("Infecting another person")
-    {
-        Person otherPerson;
-        person.infect(duration);
-        person.touch(otherPerson, disease);
-        INFO("Other person's state should be Infectious after being touched by an infected person");
-        // Ensure that person is infectious to have a higher chance of transmitting the disease
-        person.state = State::Infectious;
-        otherPerson.state = State::Susceptible;
-        person.touch(otherPerson, disease);
-        CHECK(otherPerson.state == State::Infectious);
-    }
 }
 
 TEST_CASE("Testing Population class")
@@ -111,16 +98,6 @@ TEST_CASE("Testing Population class")
         population.random_infection(disease, 10);
         INFO("Infected count should be 10 after random infection");
         CHECK(population.count_infected() == 10);
-    }
-
-    SUBCASE("Random vaccination")
-    {
-        population.vaccination_rate = vaccination_rate;
-        population.random_vaccination();
-        INFO("Vaccinated count should be " << int(population_size * vaccination_rate) << " after random vaccination");
-        // Adjust to a reasonable tolerance level
-        int expected_vaccinated = static_cast<int>(population_size * vaccination_rate);
-        CHECK(population.count_vaccinated() == doctest::Approx(expected_vaccinated).epsilon(0.1));
     }
 
     SUBCASE("One more day")

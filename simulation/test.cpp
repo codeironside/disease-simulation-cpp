@@ -143,7 +143,7 @@ TEST_CASE("Testing World class")
 
 TEST_CASE("Testing Simulation class")
 {
-    Simulation simulation("test_disease.ini");
+    Simulation simulation("disease_in.ini");
 
     // SUBCASE("Initial simulation setup") {
     //     INFO("Simulation name should be Test Simulation");

@@ -12,12 +12,17 @@
 # Set the command to run the executable
 #CMD ["./Main"]
 
-#new
 # Use the official gcc image as a base image
 FROM gcc:13.3
 
-# Install MPI
-RUN apt-get update && apt-get install -y mpich
+# Install dependencies and MPI
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    mpich \
+    gfortran \
+    libmpich-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /usr/src/simulation

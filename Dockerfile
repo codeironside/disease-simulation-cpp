@@ -12,28 +12,26 @@
 # Set the command to run the executable
 #CMD ["./Main"]
 
-# Use the official gcc image as a base image
-FROM gcc:13.3
 
-# Install dependencies and MPI
+# Use an official MPI base image
+FROM ubuntu:20.04
+
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
-    mpich \
-    gfortran \
-    libmpich-dev \
-    && apt-get clean \
+    openmpi-bin \
+    openmpi-common \
+    libopenmpi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
-WORKDIR /usr/src/simulation
+WORKDIR /app
 
-# Copy all files and directories to the working directory
+# Copy the source code into the container
 COPY . .
-COPY simulation/disease_in.ini /usr/src/simulation/disease_in.ini
 
-# Compile the program with MPI support
-RUN mpic++ -o Main simulation/simulation.cpp simulation/main.cpp
+# Build the application
+RUN mpic++ -o simulation main.cpp simulation.cpp
 
-# Set the command to run the executable with MPI
-CMD ["mpirun", "-np", "4", "./Main"]
-
+# Set the entrypoint to mpirun with default arguments
+ENTRYPOINT ["mpirun", "-np", "4", "./simulation"]

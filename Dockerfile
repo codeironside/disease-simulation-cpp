@@ -12,21 +12,23 @@
 # Set the command to run the executable
 #CMD ["./Main"]
 
-
 # Use an official MPI base image
 FROM ubuntu:20.04
 
-# Set environment variable to prevent interactive prompts
-ENV DEBIAN_FRONTEND=noninteractive
+# Set the timezone environment variable
+ENV TZ=Africa/Lagos
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
+# Install dependencies and tzdata
+RUN apt-get update && \
+    apt-get install -y \
     build-essential \
     openmpi-bin \
     openmpi-common \
     libopenmpi-dev \
-    tzdata \
-    && rm -rf /var/lib/apt/lists/*
+    tzdata && \
+    ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /app
@@ -39,3 +41,4 @@ RUN mpic++ -o simulation main.cpp simulation.cpp
 
 # Set the entrypoint to mpirun with default arguments
 ENTRYPOINT ["mpirun", "-np", "4", "./simulation"]
+

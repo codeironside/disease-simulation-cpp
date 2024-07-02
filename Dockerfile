@@ -16,12 +16,16 @@
 # Use an official MPI base image
 FROM ubuntu:20.04
 
+# Set environment variable to prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     openmpi-bin \
     openmpi-common \
     libopenmpi-dev \
+    tzdata \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory

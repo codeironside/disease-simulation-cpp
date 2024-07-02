@@ -40,7 +40,7 @@ WORKDIR /app
 
 # Copy the source code into the container
 COPY . .
-COPY simulation/disease_in.ini /usr/src/simulation/disease_in.ini
+COPY simulation/disease_in.ini /app
 # Build the application
 RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 

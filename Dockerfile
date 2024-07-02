@@ -45,4 +45,4 @@ COPY simulation/disease_in.ini /app
 RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 
 # Set the entrypoint to mpirun with default arguments
-ENTRYPOINT ["mpirun", "-np", "4", "./Main"]
+ENTRYPOINT ["mpirun", "-np", "1", "./Main"]

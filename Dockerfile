@@ -15,20 +15,18 @@
 # Use an official MPI base image
 FROM ubuntu:20.04
 
-# Set the timezone environment variable
-ENV TZ=Africa/Lagos
-
-# Install dependencies and tzdata
-RUN apt-get update && \
-    apt-get install -y \
+# Install dependencies
+RUN apt-get update && apt-get install -y \
     build-essential \
     openmpi-bin \
     openmpi-common \
     libopenmpi-dev \
-    tzdata && \
-    ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
-    dpkg-reconfigure --frontend noninteractive tzdata && \
-    rm -rf /var/lib/apt/lists/*
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the timezone to Lagos, Nigeria
+ENV TZ=Africa/Lagos
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Set the working directory
 WORKDIR /app
@@ -41,4 +39,3 @@ RUN mpic++ -o simulation main.cpp simulation.cpp
 
 # Set the entrypoint to mpirun with default arguments
 ENTRYPOINT ["mpirun", "-np", "4", "./simulation"]
-

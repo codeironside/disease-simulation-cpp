@@ -30,6 +30,11 @@ RUN apt-get update && apt-get install -y \
     && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/*
 
+
+# Set environment variables to allow running as root
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
 # Set the working directory
 WORKDIR /app
 

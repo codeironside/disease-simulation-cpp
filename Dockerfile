@@ -15,18 +15,20 @@
 # Use an official MPI base image
 FROM ubuntu:20.04
 
-# Install dependencies
+# Set environment variables to make the installation of tzdata non-interactive
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies and set the timezone
 RUN apt-get update && apt-get install -y \
     build-essential \
     openmpi-bin \
     openmpi-common \
     libopenmpi-dev \
     tzdata \
+    && ln -snf /usr/share/zoneinfo/Africa/Lagos /etc/localtime \
+    && echo "Africa/Lagos" > /etc/timezone \
+    && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/*
-
-# Set the timezone to Lagos, Nigeria
-ENV TZ=Africa/Lagos
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Set the working directory
 WORKDIR /app

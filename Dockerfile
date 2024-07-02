@@ -37,7 +37,7 @@ WORKDIR /app
 COPY . .
 
 # Build the application
-RUN mpic++ -o simulation simulation/main.cpp simulation/simulation.cpp
+RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 
 # Set the entrypoint to mpirun with default arguments
-ENTRYPOINT ["mpirun", "-np", "4", "./simulation"]
+ENTRYPOINT ["mpirun", "-np", "4", "./Main"]

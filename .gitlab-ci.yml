@@ -39,6 +39,7 @@ test_task1:
     paths:
       - test_simulation
     expire_in: 1 day
+
 build_task2:
   stage: build
   script:

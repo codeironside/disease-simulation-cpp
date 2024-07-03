@@ -38,7 +38,7 @@ test_task1:
   artifacts:
     paths:
       - test_simulation
-    expire_in: 1 day
+    expire_in: 1 day #fixed aftr 2 days
 
 build_task2:
   stage: build

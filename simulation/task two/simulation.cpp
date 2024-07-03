@@ -132,7 +132,6 @@ void Simulation::start() {
         double avg_susceptible = calculate_mean(num_susceptible);
         double stddev_susceptible = calculate_stddev(num_susceptible, avg_susceptible);
         std::ofstream stats_file("disease_stats.csv");
-        // stats_file << "Average Vaccinated, Standard Deviation Vaccinated, Average Recovered, Standard Deviation Recovered, Average Susceptible, Standard Deviation Susceptible\n";
         stats_file <<"key"<<","<<"value"<<"\n"
                 <<"timesteps"<<","<<timesteps.back()<<"\n"
                 << "suceptiible_persons"<< ", " <<num_susceptible.back()<<"\n"

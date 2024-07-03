@@ -144,6 +144,7 @@ void Simulation::start() {
         std::cout << "Simulation finished after " << timesteps.back() << " days\n";
         std::cout << "Number of vaccinated persons: " << num_vaccinated.back() << "\n";
         std::cout << "Number of recovered persons: " << num_recovered.back() << "\n";
-        std::cout << "Number of susceptible persons: " << num_susceptible.back() << "\n";    
+        std::cout << "Number of susceptible persons: " << num_susceptible.back() << "\n"; 
+        // after every stress it worked   
     vaccination_vs_recovered_file.close();
 }

@@ -16,6 +16,9 @@ RUN mpic++ -o hpc_disease_simulation /src/simulation/main.cpp /src/simulation/si
 # Run Stage
 FROM debian:bookworm-slim as run
 
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y openmpi-bin openmpi-common libopenmpi-dev && apt-get clean
+
 # Set environment variables for MPI
 ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1

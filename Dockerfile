@@ -15,6 +15,7 @@ COPY . /src
 COPY simulation /src/simulation
 COPY include /src/include
 COPY simulation/disease_in.ini /src/simulation
+COPY simulation/disease_in.ini /src
 
 RUN ls -l /src/simulation
 RUN chmod 644 /src/simulation/disease_in.ini
@@ -36,15 +37,17 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 WORKDIR /app
 COPY --from=build /src/Main /app
 COPY --from=build /src/ /app
-COPY --from=build /src/simulation/disease_in.ini /app/simulation/
+COPY --from=build /src/simulation/disease_in.ini /app
 
 RUN ls -l /app/simulation
 RUN ls -l /app
 RUN ls -l /app/simulation
-ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]
-#WORKDIR /scratch
-#COPY --from=build /src/Main /scratch
-#COPY --from=build /src/include /scratch/include
 
+WORKDIR /scratch
+COPY --from=build /src/Main /scratch
+COPY --from=build /src/include /scratch/include
+
+
+ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]
 
 

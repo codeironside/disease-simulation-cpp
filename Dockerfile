@@ -41,10 +41,10 @@ COPY --from=build /src/simulation/disease_in.ini /app/simulation/
 RUN ls -l /app/simulation
 RUN ls -l /app
 RUN ls -l /app/simulation
-
-WORKDIR /scratch
-COPY --from=build /src/Main /scratch
-COPY --from=build /src/include /scratch/include
-
-# Set the entry point to execute the simulation with MPI
 ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]
+#WORKDIR /scratch
+#COPY --from=build /src/Main /scratch
+#COPY --from=build /src/include /scratch/include
+
+
+

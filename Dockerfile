@@ -28,8 +28,8 @@ COPY --from=build /src/Main /app
 
 
 # Copy the default ini file for internal tests
-COPY /src/include /app/include
-COPY /src/simulation/disease_in.ini /app/simulation
+COPY --from= build /src/include /app/include
+COPY --from=build /src/simulation/disease_in.ini /app/simulation
 
 
 # Set the entry point to execute the simulation with MPI

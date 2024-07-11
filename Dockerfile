@@ -1,27 +1,33 @@
+# Build Stage
+FROM debian:bookworm-slim as build
 
-FROM ubuntu:20.04
+WORKDIR /src
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Copy necessary files
+COPY CMakeLists.txt /src
+COPY simulation /src/simulation
+COPY include /src/include 
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    openmpi-bin \
-    openmpi-common \
-    libopenmpi-dev \
-    tzdata \
-    && ln -snf /usr/share/zoneinfo/Africa/Lagos /etc/localtime \
-    && echo "Africa/Lagos" > /etc/timezone \
-    && dpkg-reconfigure -f noninteractive tzdata \
-    && rm -rf /var/lib/apt/lists/*
+# Install build dependencies
+RUN apt-get update && apt-get install -y build-essential cmake openmpi-bin openmpi-common libopenmpi-dev && apt-get clean
 
+# Build the application
+WORKDIR /src/build
+RUN cmake .. && make
 
+# Run Stage
+FROM debian:bookworm-slim as run
+
+# Set environment variables for MPI
 ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
+# Copy the built application from the build stage
 WORKDIR /app
+COPY --from=build /src/build/hpc_disease_simulation /app
 
-COPY . .
-COPY simulation/disease_in.ini /app
-RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
+# Change to the scratch directory for runtime operations
+WORKDIR /scratch
 
-ENTRYPOINT ["mpirun", "-np", "1", "./Main"]
+# Set the entry point to execute the simulation with MPI
+ENTRYPOINT ["mpirun", "-np", "1", "/app/hpc_disease_simulation"]

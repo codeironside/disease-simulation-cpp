@@ -1,5 +1,5 @@
 
-FROM ubuntu:20.04
+#FROM ubuntu:20.04
 
 #ENV DEBIAN_FRONTEND=noninteractive
 FROM debian:bookworm-slim as build

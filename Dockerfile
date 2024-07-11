@@ -27,7 +27,7 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
 # Copy the built application from the build stage
 WORKDIR /app
-COPY --from=build /src/hpc_disease_simulation /app
+COPY --from=build /src/hpc_disease_simulation /src
 
 # Copy the default ini file for internal tests
 COPY include /app/include

@@ -28,7 +28,7 @@ WORKDIR /app
 COPY --from=build /src/hpc_disease_simulation /app
 
 # Copy the default ini file
-#COPY simulation/disease_in.ini /app
+#COPY simulation/disease_in.ini /app/simulation
 
 # Change to the scratch directory for runtime operations
 WORKDIR /scratch

@@ -40,7 +40,7 @@ COPY --from=build /src/simulation/disease_in.ini /app/simulation/
 
 RUN ls -l /app/simulation
 RUN ls -l /app
-RUN ls -l /src/simulation
+RUN ls -l /app/simulation
 
 WORKDIR /scratch
 COPY --from=build /src/Main /scratch

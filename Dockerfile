@@ -3,18 +3,20 @@ FROM debian:bookworm-slim as build
 
 WORKDIR /src
 
-# Copy necessary files
-COPY . .
-COPY simulation /src/simulation
-COPY include /src/include
-COPY simulation/disease_in.ini /src/simulation
-
 # Install build dependencies
 RUN apt-get update && apt-get install -y build-essential openmpi-bin openmpi-common libopenmpi-dev && apt-get clean
 
 # Set environment variables for MPI
 ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+# Copy necessary files
+COPY . /src
+COPY simulation /src/simulation
+COPY include /src/include
+COPY simulation/disease_in.ini /src/simulation
+
+
 
 # Build the application
 RUN mpic++ -o Main /src/simulation/main.cpp /src/simulation/simulation.cpp

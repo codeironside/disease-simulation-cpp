@@ -34,11 +34,13 @@ ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 # Copy the built application from the build stage
 WORKDIR /app
-COPY --from=build src/Main /app
-COPY --from=build simulation/disease_in.ini /app/simulation/
+COPY --from=build /src/Main /app
+COPY --from=build /src/ /app
+COPY --from=build /src/simulation/disease_in.ini /app/simulation/
 
 RUN ls -l /app/simulation
 RUN ls -l /app
+RUN ls -l /src/simulation
 
 WORKDIR /scratch
 COPY --from=build /src/Main /scratch

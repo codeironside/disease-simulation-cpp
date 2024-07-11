@@ -38,7 +38,8 @@ COPY --from=build src/Main /app
 COPY --from=build src/include /app/include
 COPY --from=build src/simulation/disease_in.ini /app/simulation
 RUN ls -l /app/simulation
-RUN chmod 644 /app/simulation/disease_in.ini
+RUN ls -l /app
+
 WORKDIR /scratch
 COPY --from=build /src/Main /scratch
 COPY --from=build /src/include /scratch/include

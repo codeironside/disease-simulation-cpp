@@ -27,6 +27,9 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 WORKDIR /app
 COPY --from=build /src/hpc_disease_simulation /app
 
+# Copy the default ini file
+COPY include/disease_in.ini /app/include/
+
 # Change to the scratch directory for runtime operations
 WORKDIR /scratch
 

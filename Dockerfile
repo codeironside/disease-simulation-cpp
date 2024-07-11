@@ -36,6 +36,9 @@ COPY simulation/disease_in.ini /app/simulation
 
 # Change to the scratch directory for runtime operations
 WORKDIR /scratch
+COPY include /scratch/include
+COPY . .
+COPY simulation/disease_in.ini /scratch/simulation
 
 
 # Set the entry point to execute the simulation with MPI

@@ -33,4 +33,4 @@ COPY simulation/disease_in.ini /app/simulation
 
 
 # Set the entry point to execute the simulation with MPI
-ENTRYPOINT ["mpirun", "-np", "1", "./app/Main"]
+ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]

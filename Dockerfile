@@ -37,7 +37,9 @@ WORKDIR /app
 COPY --from=build src/Main /app
 COPY --from=build src/include /app/include
 COPY --from=build src/simulation/disease_in.ini /app/simulation/
+
 RUN ls -l /app/simulation
+RUN ls -l /app/include
 RUN ls -l /app
 
 WORKDIR /scratch

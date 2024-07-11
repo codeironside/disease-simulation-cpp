@@ -19,6 +19,7 @@ COPY simulation/disease_in.ini /src
 
 
 RUN ls -l /src
+RUN ls -l /src/include
 
 
 
@@ -39,10 +40,11 @@ COPY --from=build /src/Main /app
 COPY --from=build /src/ /app
 COPY --from=build /src/disease_in.ini /app
 COPY --from=build /src/disease_in.ini /app/simulation
+COPY --from=build /src/include /app/include
 
 RUN ls -l /app/simulation
 RUN ls -l /app
-
+RUN ls -l /app/include
 WORKDIR /scratch
 COPY --from=build /src/Main /scratch
 COPY --from=build /src/include /scratch/include

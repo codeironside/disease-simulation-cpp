@@ -6,13 +6,13 @@ WORKDIR /src
 # Copy necessary files
 COPY simulation /src/simulation
 COPY include /src/include
-COPY . .
-COPY simulation/disease_in.ini /src/simulation
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y build-essential openmpi-bin openmpi-common libopenmpi-dev && apt-get clean
 
 # Build the application
+COPY include /src/include
+COPY simulation/disease_in.ini /src/simulation
 RUN mpic++ -o hpc_disease_simulation /src/simulation/main.cpp /src/simulation/simulation.cpp
 
 # Run Stage
@@ -29,17 +29,9 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 WORKDIR /app
 COPY --from=build /src/hpc_disease_simulation /app
 
-# Copy the default ini file
+# Copy the default ini file for internal tests
 COPY include /app/include
-COPY . .
 COPY simulation/disease_in.ini /app/simulation
-
-# Change to the scratch directory for runtime operations
-WORKDIR /scratch
-COPY include /scratch/include
-COPY . .
-COPY simulation/disease_in.ini /scratch/simulation
-
 
 # Set the entry point to execute the simulation with MPI
 ENTRYPOINT ["mpirun", "-np", "1", "/app/hpc_disease_simulation"]

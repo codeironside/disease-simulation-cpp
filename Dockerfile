@@ -4,7 +4,7 @@ FROM debian:bookworm-slim as build
 WORKDIR /src
 
 # Copy necessary files
-COPY CMakeLists.txt /src
+# COPY CMakeLists.txt /src
 COPY simulation /src/simulation
 COPY include /src/include 
 

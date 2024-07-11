@@ -17,8 +17,8 @@ COPY include /src/include
 COPY simulation/disease_in.ini /src/simulation
 COPY simulation/disease_in.ini /src
 
-RUN ls -l /src/simulation
-RUN chmod 644 /src/simulation/disease_in.ini
+
+RUN ls -l /src
 
 
 
@@ -37,11 +37,11 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 WORKDIR /app
 COPY --from=build /src/Main /app
 COPY --from=build /src/ /app
-COPY --from=build /src/simulation/disease_in.ini /app
+COPY --from=build /src/disease_in.ini /app
+COPY --from=build /src/disease_in.ini /app/simulation
 
 RUN ls -l /app/simulation
 RUN ls -l /app
-RUN ls -l /app/simulation
 
 WORKDIR /scratch
 COPY --from=build /src/Main /scratch

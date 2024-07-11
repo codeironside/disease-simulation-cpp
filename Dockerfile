@@ -28,7 +28,7 @@ COPY --from=build /src/Main /app
 
 
 # Copy the default ini file for internal tests
-COPY --from= build /src/include /app/include
+COPY --from=build /src/include /app/include
 COPY --from=build /src/simulation/disease_in.ini /app/simulation
 
 

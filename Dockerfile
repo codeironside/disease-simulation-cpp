@@ -24,12 +24,12 @@ FROM debian:bookworm-slim as run
 
 # Copy the built application from the build stage
 WORKDIR /app
-COPY --from=build /src /app
+COPY --from=build /src/Main /app
 
 
 # Copy the default ini file for internal tests
-COPY include /app/include
-COPY simulation/disease_in.ini /app/simulation
+COPY /src/include /app/include
+COPY /src/simulation/disease_in.ini /app/simulation
 
 
 # Set the entry point to execute the simulation with MPI

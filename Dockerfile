@@ -32,7 +32,7 @@ COPY --from=build /src/hpc_disease_simulation /app
 # Copy the default ini file for internal tests
 COPY include /app/include
 COPY simulation/disease_in.ini /app/simulation
-COPY . .
+
 
 # Set the entry point to execute the simulation with MPI
-ENTRYPOINT ["mpirun", "-np", "1", "/app/hpc_disease_simulation"]
+ENTRYPOINT ["mpirun", "-np", "1", "/src/hpc_disease_simulation"]

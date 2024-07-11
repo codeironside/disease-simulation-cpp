@@ -9,7 +9,7 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 WORKDIR /scratch
 
 COPY . .
-COPY simulation/disease_in.ini /scr]
+COPY simulation/disease_in.ini /scratch
 RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 
 ENTRYPOINT ["mpirun", "-np", "1", "./Main"]

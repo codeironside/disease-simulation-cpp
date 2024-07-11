@@ -22,12 +22,11 @@ RUN mpic++ -o Main /src/simulation/main.cpp /src/simulation/simulation.cpp
 # Run Stage
 FROM debian:bookworm-slim as run
 
+RUN apt-get update && apt-get install -y openmpi-bin openmpi-common && apt-get clean
+
 # Copy the built application from the build stage
 WORKDIR /app
 COPY --from=build /src/Main /app
-
-
-# Copy the default ini file for internal tests
 COPY --from=build /src/include /app/include
 COPY --from=build /src/simulation/disease_in.ini /app/simulation
 

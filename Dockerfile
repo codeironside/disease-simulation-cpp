@@ -19,7 +19,6 @@ RUN g++ -g -o Main simulation/main.cpp simulation/simulation.cpp
 
 WORKDIR /scratch
 COPY . /scratch
-RUN mkdir simulation
 COPY include /scratch/include
 RUN ls -l /scratch/include
 

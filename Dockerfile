@@ -1,6 +1,6 @@
 
 FROM debian:bookworm-slim as build
-RUN apt-get update && apt-get install -y build-essential openmpi-bin openmpi-common libopenmpi-dev && #apt-get clean
+RUN apt-get update && apt-get install -y build-essential openmpi-bin openmpi-common libopenmpi-dev && apt-get clean
 
 
 ENV OMPI_ALLOW_RUN_AS_ROOT=1

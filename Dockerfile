@@ -14,5 +14,7 @@ COPY . /scratch
 COPY include /scratch/include
 RUN ls -l /scratch/include
 
-# Set the command to run the executable
-CMD ["./Main"]
+# Set the command to run the executablee
+
+
+ENTRYPOINT ["./Main"]

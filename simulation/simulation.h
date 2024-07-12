@@ -26,7 +26,7 @@ public:
   double transmission_probability;
   double mutation_probability;
   std::string name;
-  cout << name <<endl;
+  cout << duration <<endl;
   void mutate() {
     double duration_change = (rand() % 21 - 10) / 100.0;  
     double transmission_change = (rand() % 21 - 10) / 100.0;

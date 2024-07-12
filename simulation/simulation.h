@@ -26,8 +26,7 @@ public:
   int duration;
   double transmission_probability;
   double mutation_probability;
-  std::string name;
-  std::cout << duration <<endl;
+  std::string name="";
   void mutate() {
     double duration_change = (rand() % 21 - 10) / 100.0;  
     double transmission_change = (rand() % 21 - 10) / 100.0;
@@ -42,7 +41,7 @@ public:
     }
 }
 
-  Disease(std::string name, int duration = 0, double transmission_probability = 0.0, double mutation_probability = 0.0)
+  Disease(std::string name="", int duration = 0, double transmission_probability = 0.0, double mutation_probability = 0.0)
         : name(name), duration(duration), transmission_probability(transmission_probability), mutation_probability(mutation_probability) {}
 };
 

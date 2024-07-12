@@ -66,4 +66,7 @@ Make sure you have a working Docker installation. You can download and install D
 
 During the course of this project, I encountered significant challenges with mounting the `disease_in.ini` file correctly in the Docker container. It required considerable troubleshooting and adjustments to ensure the file was accessible and correctly used by the simulation. If you encounter similar issues, ensure that the path and file permissions are correctly set and that you are mounting the file in the expected location within the container.
 
+
+# IT HAD NO ISSUES WITH MPI, BUT WHEN I STARTED Mounting AN EXTERNAL CONFIG FILE I HAD ISSUES
+
 # THANK YOU

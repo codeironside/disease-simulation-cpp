@@ -16,7 +16,7 @@ RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 WORKDIR /scratch
 COPY . .
 COPY . /scratch
-COPY simulation/disease_in.ini /scratch
+
 
 
 ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]

@@ -18,7 +18,7 @@ RUN mpic++ -g -o Main simulation/main.cpp simulation/simulation.cpp
 WORKDIR /scratch
 COPY . /scratch
 COPY include /scratch/include
-COPY . /scratch
+RUN ls -l /scratch/include
 
 
 #ENTRYPOINT ["/app/run_gdb.sh"]

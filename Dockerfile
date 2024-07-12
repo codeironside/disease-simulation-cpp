@@ -11,15 +11,15 @@ WORKDIR /app
 COPY . .
 COPY . /app
 COPY simulation/disease_in.ini /app
-RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
+RUN mpic++ -g -o Main simulation/main.cpp simulation/simulation.cpp
+RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
 
 WORKDIR /scratch
 COPY . /scratch
 COPY include /scratch/include
 COPY . /scratch
 
+ENTRYPOINT ["mpirun", "-np", "1", "gdb", "--args", "/app/Main"]
 
-
-
-ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]
+#ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]
 

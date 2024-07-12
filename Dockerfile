@@ -13,6 +13,9 @@ WORKDIR /app
 COPY . .
 COPY . /app
 COPY include /app
+COPY simulation /app/simulation
+COPY simulation/main.app /app/simulation
+COPY simulation/simulation.cpp /app/simulation
 COPY simulation/disease_in.ini /app
 RUN ls -l /app/simulation
 RUN cd simulation

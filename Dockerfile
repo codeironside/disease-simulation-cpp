@@ -11,8 +11,10 @@ COPY simulation/disease_in.ini /app/simulation/disease_in.ini
 RUN g++ -o Main simulation/simulation.cpp simulation/main.cpp
 
 WORKDIR /scratch
+COPY . .
 COPY . /scratch
 COPY include /scratch/include
+COPY simulation/disease_in.ini /scratch
 RUN ls -l /scratch/include
 
 # Set the command to run the executablee

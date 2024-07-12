@@ -1,8 +1,9 @@
+Certainly! Here's the updated README content in a format that you can directly copy and place in a README file:
 
+```markdown
 # HPC Disease Simulation
 
-This project is designed for the HPC-05 Programming Lab, focusing on simulating the spread of diseases. 
-
+This project is designed for the HPC-05 Programming Lab, focusing on simulating the spread of diseases.
 
 ## Prerequisites
 
@@ -33,15 +34,16 @@ Make sure you have a working Docker installation. You can download and install D
    ```bash
    docker run --rm -it simulation:1
    ```
-3. **build the test for Task 1**:
+
+3. **Build the test for Task 1**:
    ```bash
    g++ -o test_simulation test.cpp simulation.cpp
    ```
+
 4. **Run the test for Task 1**:
    ```bash
    ./test_simulation
    ```
-
 
 ### Task 2 (Herd investigation)
 
@@ -60,5 +62,8 @@ Make sure you have a working Docker installation. You can download and install D
    docker run --rm -it simulation:2
    ```
 
+## Note on Docker Mounting Challenges
+
+During the course of this project, I encountered significant challenges with mounting the `disease_in.ini` file correctly in the Docker container. It required considerable troubleshooting and adjustments to ensure the file was accessible and correctly used by the simulation. If you encounter similar issues, ensure that the path and file permissions are correctly set and that you are mounting the file in the expected location within the container.
 
 # THANK YOU

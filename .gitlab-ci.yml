@@ -104,6 +104,7 @@ build_task1:
   stage: build
   script:
     - echo "task one running"
+    - cd simulation
     - docker build -t simulation:1 .
     - docker save simulation:1 > simulation_task1.tar
     - docker run --rm -v /scratch/disease_in.ini:/scratch simulation:1

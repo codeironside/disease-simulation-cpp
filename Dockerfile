@@ -19,5 +19,5 @@ COPY . /scratch
 COPY simulation/disease_in.ini /scratch
 
 
-ENTRYPOINT ["mpirun", "-np", "1", "app/Main"]
+ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]
 

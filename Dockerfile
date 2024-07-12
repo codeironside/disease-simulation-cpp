@@ -4,7 +4,8 @@ WORKDIR /app
 
 # Copy all files and directories to the working directory
 COPY . .
-COPY simulation/disease_in.ini /usr/simulation/disease_in.ini
+COPY simulation/disease_in.ini /app/disease_in.ini
+COPY simulation/disease_in.ini /app/simulation/disease_in.ini
 
 # Compile the program, specifying the include directory
 RUN g++ -o Main simulation/simulation.cpp simulation/main.cpp

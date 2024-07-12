@@ -13,9 +13,9 @@ WORKDIR /app
 COPY . .
 COPY . /app
 COPY include /app
-COPY simulation/disease_in.ini /app/simulation/disease_in.ini
+COPY simulation/disease_in.ini /app
 RUN ls -l /app/simulation
-RUN g++ -g -o Main simulation/main.cpp simulation/simulation.cpp
+RUN g++ -g -o Main main.cpp simulation.cpp
 #RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
 
 

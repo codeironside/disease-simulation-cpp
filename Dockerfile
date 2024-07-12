@@ -19,6 +19,7 @@ RUN g++ -g -o Main simulation/main.cpp simulation/simulation.cpp
 
 WORKDIR /scratch
 COPY . /scratch
+COPY simulation/disease_in.ini /scratch
 COPY include /scratch/include
 RUN ls -l /scratch/include
 

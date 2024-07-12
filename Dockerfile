@@ -1,36 +1,18 @@
+FROM gcc:13.3
 
-FROM debian:bookworm-slim as build
-#RUN apt-get update && apt-get install -y build-essential openmpi-bin openmpi-common libopenmpi-dev && #apt-get clean
-RUN apt-get update && \
-    apt-get install -y g++
+WORKDIR /usr/src/simulation
 
-
-#ENV OMPI_ALLOW_RUN_AS_ROOT=1
-#ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
-
-WORKDIR /app
-
+# Copy all files and directories to the working directory
 COPY . .
-COPY . /app
-COPY include /app
-COPY simulation /app/simulation
-COPY simulation/main.app /app/simulation
-COPY simulation/simulation.cpp /app/simulation
-COPY simulation/disease_in.ini /app
-RUN ls -l /app/simulation
-RUN cd simulation
-RUN g++ -g -o Main main.cpp simulation.cpp
-#RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
+COPY simulation/disease_in.ini /usr/src/simulation/disease_in.ini
 
+# Compile the program, specifying the include directory
+RUN g++ -o Main simulation/simulation.cpp simulation/main.cpp
 
 WORKDIR /scratch
 COPY . /scratch
 COPY include /scratch/include
 RUN ls -l /scratch/include
 
-
-#ENTRYPOINT ["/app/run_gdb.sh"]
-#ENTRYPOINT ["mpirun", "-np", "1", "gdb", "--args", "/app/Main"]
-
-ENTRYPOINT ["/app/Main"]
-
+# Set the command to run the executable
+CMD ["./Main"]

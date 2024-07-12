@@ -22,7 +22,7 @@ build_task1:
     - docker save simulation:1 > simulation_task1.tar
     - echo "Contents of /scratch before running container:" # Debugging
     - ls -l $CI_PROJECT_DIR/scratch # Debugging
-    #- docker run --rm simulation:1
+    - docker run --rm simulation:1
     - docker run --rm -v $CI_PROJECT_DIR/simulation/disease_in.ini:/scratch/disease_in.ini simulation:1
     - echo "finished running simulation task 1"
   artifacts:

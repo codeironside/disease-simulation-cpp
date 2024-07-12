@@ -21,7 +21,7 @@ build_task1:
     - docker build -t simulation:1 .
     - docker save simulation:1 > simulation_task1.tar
     #- docker run --rm simulation:1
-    - docker run --rm -v /simulation/disease_in.ini:/simulation/disease_in.ini simulation:1
+    - docker run --rm -v /simulation/disease_in.ini:/scratch simulation:1
     - echo "finished running simulation task 1"
   artifacts:
     paths:

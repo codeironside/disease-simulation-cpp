@@ -14,6 +14,7 @@ COPY . .
 COPY . /app
 COPY include /app
 COPY simulation/disease_in.ini /app/disease_in.ini
+RUN ls -l /app
 RUN g++ -g -o Main simulation/main.cpp simulation/simulation.cpp
 #RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
 

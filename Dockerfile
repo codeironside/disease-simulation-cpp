@@ -6,13 +6,18 @@ RUN apt-get update && apt-get install -y build-essential openmpi-bin openmpi-com
 ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
-WORKDIR /scratch
-
 WORKDIR /app
 
 COPY . .
-COPY simulation/disease_in.ini /scratch
+COPY . /app
+COPY simulation/disease_in.ini /app
 RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 
-ENTRYPOINT ["mpirun", "-np", "1", "./Main"]
+WORKDIR /scratch
+COPY . .
+COPY . /scratch
+COPY simulation/disease_in.ini /scratch
+
+
+ENTRYPOINT ["mpirun", "-np", "1", "app/Main"]
 

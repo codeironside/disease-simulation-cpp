@@ -25,11 +25,12 @@ public:
   int duration;
   double transmission_probability;
   double mutation_probability;
-  std::string name= "";
+  std::string name;
+  cout << name <<endl;
   void mutate() {
     double duration_change = (rand() % 21 - 10) / 100.0;  
     double transmission_change = (rand() % 21 - 10) / 100.0;
-
+    
     duration = static_cast<int>(duration * (1 + duration_change));
     transmission_probability *= (1 + transmission_change);
 

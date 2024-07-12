@@ -19,9 +19,8 @@ COPY . .
 COPY . /app
 COPY simulation/disease_in.ini /app
 RUN mpic++ -g -o Main simulation/main.cpp simulation/simulation.cpp
-RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
-COPY run_gdb.sh /app/run_gdb.sh
-RUN chmod +x /app/run_gdb.sh
+#RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
+
 
 WORKDIR /scratch
 COPY . /scratch
@@ -29,7 +28,7 @@ COPY include /scratch/include
 COPY . /scratch
 
 
-ENTRYPOINT ["/app/run_gdb.sh"]
+#ENTRYPOINT ["/app/run_gdb.sh"]
 #ENTRYPOINT ["mpirun", "-np", "1", "gdb", "--args", "/app/Main"]
 
 #ENTRYPOINT ["mpirun", "-np", "1", "/app/Main"]

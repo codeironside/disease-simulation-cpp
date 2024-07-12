@@ -14,7 +14,8 @@ COPY simulation/disease_in.ini /app
 RUN mpic++ -o Main simulation/main.cpp simulation/simulation.cpp
 
 WORKDIR /scratch
-COPY . .
+COPY . /scratch
+COPY include /scratch/include
 COPY . /scratch
 
 

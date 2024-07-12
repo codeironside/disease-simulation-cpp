@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <fstream>
 #include <numeric>
+#include <iostream>
 #include <valarray>
 #include "../include/INIReader.h"
 //class Person {};

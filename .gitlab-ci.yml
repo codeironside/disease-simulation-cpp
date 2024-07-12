@@ -18,7 +18,6 @@ build_task1:
   stage: build
   script:
     - echo "task one running"
-    - cd simulation
     - docker build -t simulation:1 .
     - docker save simulation:1 > simulation_task1.tar
     - echo "Contents of /scratch before running container:" # Debugging

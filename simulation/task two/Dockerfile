@@ -46,14 +46,13 @@ WORKDIR /app
 
 COPY . .
 COPY . /app
-COPY simulation/disease_in.ini /app
+COPY disease_in.ini /app
 RUN g++ -g -o Main main.cpp simulation.cpp
 #RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
 
 
 WORKDIR /scratch
 COPY . /scratch
-COPY simulation/disease_in.ini /scratch
 COPY include /scratch/include
 RUN ls -l /scratch/include
 

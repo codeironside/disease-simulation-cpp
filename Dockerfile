@@ -21,6 +21,8 @@ COPY simulation/disease_in.ini /app
 RUN mpic++ -g -o Main simulation/main.cpp simulation/simulation.cpp
 RUN mpic++ -Wall -Wextra -o Main simulation/main.cpp simulation/simulation.cpp
 COPY run_gdb.sh /app/run_gdb.sh
+RUN chmod +x /app/run_gdb.sh
+
 WORKDIR /scratch
 COPY . /scratch
 COPY include /scratch/include

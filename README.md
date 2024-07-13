@@ -1,6 +1,4 @@
-Certainly! Here's the updated README content:
 
-```markdown
 # HPC Disease Simulation
 
 This project is designed for the HPC-05 Programming Lab, focusing on simulating the spread of diseases.

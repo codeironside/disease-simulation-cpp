@@ -20,7 +20,6 @@ int main(int argc, char** argv)
 
     Simulation sim = Simulation();
 
-    // Each process runs the simulation (could be parallelized inside the simulation itself)
     sim.start();
 
     MPI_Finalize();

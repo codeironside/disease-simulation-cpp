@@ -27,7 +27,7 @@ build_task1:
     - echo "finished building simulation task 1"
   artifacts:
     paths:
-      - simulation_task1.tar
+      - simulation/simulation_task1.tar
     expire_in: 1 week
   timeout: 2h  # Increase timeout to 2 hours
 

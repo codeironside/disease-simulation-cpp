@@ -20,7 +20,9 @@ Simulation::Simulation(std::string in_file) {
     std::string name = reader.Get("disease", "name", "");
     int duration = reader.GetInteger("disease", "duration", 0);
     double transmission_probability = reader.GetReal("disease","transmissability", 0.0);
-    disease = Disease(name, duration, transmission_probability);
+    double mutation_probability = reader.GetReal("disease", "mutation_probability", 0.0);
+    disease = Disease(name, duration, transmission_probability, mutation_probability);
+
     std::string section_name = "population_2";
     int population_size = reader.GetInteger(section_name, "size", 100);
     bool patient_0 = reader.GetBoolean(section_name,"patient_0", false);

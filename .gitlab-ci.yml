@@ -107,7 +107,7 @@ build_task1:
     - cd simulation
     - docker build -t simulation:1 .
     - docker save simulation:1 > simulation_task1.tar
-    - ls -ls /scratch
+    - ls -l /scratch
     - pwd
     - docker run --rm -v $CI_PROJECT_DIR/scratch/disease_in.ini:/scratch/disease_in.ini simulation:1
     - echo "finished running simulation task 1"

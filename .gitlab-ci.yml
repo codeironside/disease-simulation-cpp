@@ -64,5 +64,5 @@ run_simulation:
     - ls -l scratch
     - cat $CI_PROJECT_DIR/scratch/disease_in.ini
     - pwd
-    - docker run --rm -v $CI_PROJECT_DIR/scratch/disease_in.ini:/scratch/disease_in.ini simulation:1
+    - docker run --rm -v $CI_PROJECT_DIR/scratch/disease_in.ini:/scratch simulation:1
     - echo "finished running simulation"

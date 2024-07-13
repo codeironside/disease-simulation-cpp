@@ -35,7 +35,7 @@ Make sure you have a working Docker installation. You can download and install D
 
 3. **Run the simulation for Task 1**:
    ```bash
-   docker run --rm -it simulation:1
+   docker run --rm simulation:1
    ```
 
 4. **Build the test for Task 1**:
@@ -62,7 +62,7 @@ Make sure you have a working Docker installation. You can download and install D
 
 3. **Run the simulation for Task 2**:
    ```bash
-   docker run --rm -it simulation:2
+   docker run --rm simulation:2
    ```
 
 ## Note on Docker Mounting Challenges

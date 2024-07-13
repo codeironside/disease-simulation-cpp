@@ -60,7 +60,7 @@ run_simulation:
   script:
     - echo "Running simulation"
     - mkdir -p /scratch
-    - cp scratch/disease_in.ini /scratch/
+    - cp scratch/disease_in.ini /scratch/disease_in.ini
     - ls -l scratch
     - cat $CI_PROJECT_DIR/scratch/disease_in.ini
     - pwd

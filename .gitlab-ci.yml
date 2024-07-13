@@ -1,88 +1,3 @@
-# stages:
-#   - build
-#   - test
-#   # - deploy
-
-# image: gcc:latest
-
-# services:
-#   - docker:dind
-
-# variables:
-#   DOCKER_DRIVER: overlay2
-#   DOCKER_TLS_CERTDIR: ""
-
-# before_script:
-#   - apt-get update
-#   - apt-get install -y docker.io
-
-# build_task1:
-#   stage: build
-#   script:
-#     - echo "task one running"
-#     - docker build -t simulation:1 .
-#     - docker save simulation:1 > simulation_task1.tar
-#     - docker run --rm simulation:1
-#     - echo "finished running simulation task 1"
-#   artifacts:
-#     paths:
-#       - simulation_task1.tar
-#     expire_in: 1 week
-#   timeout: 2h
-
-# test_task1:
-#   stage: test
-#   script:
-#     - echo "Running tests for task one"
-#     - g++ -o test_simulation simulation/test.cpp simulation/simulation.cpp
-#     - ./test_simulation
-#   dependencies:
-#     - build_task1
-
-# build_task2:
-#   stage: build
-#   script:
-#     - echo "task two running"
-#     - cd simulation/'task two'
-#     - docker build -t simulation:2 .
-#     - docker save simulation:2 > simulation_task2.tar
-#     - docker run --rm simulation:2
-#     - echo "finished running simulation task 2"
-#   artifacts:
-#     paths:
-#       - simulation/task two/simulation_task2.tar
-#     expire_in: 1 week
-#   timeout: 2h
-
-# # test_task2:
-# #   stage: test
-# #   script:
-# #     - cd simulation/'task two'
-# #     - g++ -o test_simulation test.cpp simulation.cpp
-# #     - ./test_simulation
-# #   dependencies:
-# #     - build_task2
-
-# # Uncomment and modify the deploy and nightly_build stages as needed
-# # deploy:
-# #   stage: deploy
-# #   script:
-# #     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-# #     - docker tag simulation:1 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
-# #     - docker tag simulation:2 $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
-# #     - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation1
-# #     - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:simulation2
-# #   only:
-# #     - main
-
-# # nightly_build:
-# #   stage: build
-# #   script:
-# #     - docker build -t simulation:nightly .
-# #     - docker tag simulation:nightly $CI_REGISTRY/your-username/your-repository:nightly
-# #     - docker push $CI_REGISTRY/sh04625/hpc-disease-simulation/:nightly
-# #   only:
-# #     - schedules
 stages:
   - build
   - test
@@ -107,10 +22,7 @@ build_task1:
     - cd simulation
     - docker build -t simulation:1 .
     - docker save simulation:1 > simulation_task1.tar
-    - ls -l /scratch
-    - pwd
-    - docker run --rm -v $CI_PROJECT_DIR/scratch/disease_in.ini:/scratch/disease_in.ini simulation:1
-    - echo "finished running simulation task 1"
+    - echo "finished building simulation task 1"
   artifacts:
     paths:
       - simulation_task1.tar
@@ -136,7 +48,6 @@ build_task2:
     - cd simulation/'task two'
     - docker build -t simulation:2 .
     - docker save simulation:2 > simulation_task2.tar
-    - docker run --rm simulation:2
     - echo "finished running simulation task 2"
   artifacts:
     paths:
@@ -144,3 +55,11 @@ build_task2:
     expire_in: 1 week
   timeout: 2h  # Increase timeout to 2 hours
 
+run_simulation:
+  stage: build
+  script:
+    - echo "Running simulation"
+    - mkdir -p /scratch
+    - cp scratch/disease_in.ini /scratch/
+    - docker run --rm -v $CI_PROJECT_DIR/scratch/disease_in.ini:/scratch/disease_in.ini simulation:1
+    - echo "finished running simulation"

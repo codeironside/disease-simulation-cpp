@@ -13,7 +13,7 @@
 #include <numeric>
 #include <iostream>
 #include <valarray>
-#include "../include/INIReader.h"
+#include "./include/INIReader.h"
 //class Person {};
 enum class State {
   Susceptible,

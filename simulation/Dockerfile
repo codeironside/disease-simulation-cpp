@@ -18,7 +18,8 @@ RUN g++ -g -o Main main.cpp simulation.cpp
 
 WORKDIR /scratch
 COPY . /scratch
-
+COPY disease_in.ini /scratch
+RUN cat scratch/disease_in.ini
 
 
 #ENTRYPOINT ["/app/run_gdb.sh"]

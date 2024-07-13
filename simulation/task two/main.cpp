@@ -1,8 +1,5 @@
 
 #include <iostream>
-#include "simulation.h"
-#include <string>
-#include <iostream>
 #include <mpi.h>
 #include "simulation.h"
 #include <string>

@@ -20,9 +20,9 @@ build_task1:
   script:
     - echo "task one running"
     - cd simulation
-    - docker build -t simulation:1 .
-    - docker save simulation:1 > simulation_task1.tar
-    - docker run --rm simulation:1
+    - docker build submission:latest .
+    - docker save submission:latest > simulation_task1.tar
+    - docker run --rm submission:latest
     - echo "finished running simulation"
     - echo "finished building simulation task 1"
   artifacts:

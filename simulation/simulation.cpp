@@ -1,5 +1,5 @@
 #include "simulation.h"
-#include "../include/INIReader.h"
+#include "./include/INIReader.h"
 #include <iostream>
 #include <vector>
 #include <fstream>

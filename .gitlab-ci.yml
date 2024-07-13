@@ -57,13 +57,4 @@ build_task2:
     expire_in: 1 week
   timeout: 2h  # Increase timeout to 2 hours
 
-run_simulation:
-  stage: build
-  script:
-    - echo "Running simulation"
-    - mkdir -p /scratch
-    - cp scratch/disease_in.ini /scratch/disease_in.ini
-    - ls -l scratch
-    - cat $CI_PROJECT_DIR/scratch/disease_in.ini
-    - pwd
 

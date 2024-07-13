@@ -18,7 +18,7 @@ RUN g++ -g -o Main main.cpp simulation.cpp
 
 WORKDIR /scratch
 COPY . /scratch
-COPY disease_in.ini /scratch
+COPY scratch/disease_in.ini /scratch
 RUN cat scratch/disease_in.ini
 
 

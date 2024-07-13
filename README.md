@@ -1,4 +1,4 @@
-Certainly! Here's the updated README content in a format that you can directly copy and place in a README file:
+Certainly! Here's the updated README content:
 
 ```markdown
 # HPC Disease Simulation
@@ -25,27 +25,32 @@ Make sure you have a working Docker installation. You can download and install D
 
 ### Task 1
 
-1. **Build the Docker image for Task 1**:
+1. **Navigate to the simulation directory for Task 1**:
+   ```bash
+   cd simulation
+   ```
+
+2. **Build the Docker image for Task 1**:
    ```bash
    docker build . -t simulation:1
    ```
 
-2. **Run the simulation for Task 1**:
+3. **Run the simulation for Task 1**:
    ```bash
    docker run --rm -it simulation:1
    ```
 
-3. **Build the test for Task 1**:
+4. **Build the test for Task 1**:
    ```bash
    g++ -o test_simulation test.cpp simulation.cpp
    ```
 
-4. **Run the test for Task 1**:
+5. **Run the test for Task 1**:
    ```bash
    ./test_simulation
    ```
 
-### Task 2 (Herd investigation)
+### Task 2 (Herd Investigation)
 
 1. **Navigate to the Task 2 folder**:
    ```bash
@@ -66,7 +71,8 @@ Make sure you have a working Docker installation. You can download and install D
 
 During the course of this project, I encountered significant challenges with mounting the `disease_in.ini` file correctly in the Docker container. It required considerable troubleshooting and adjustments to ensure the file was accessible and correctly used by the simulation. If you encounter similar issues, ensure that the path and file permissions are correctly set and that you are mounting the file in the expected location within the container.
 
+## Note on MPI Integration
 
-# IT HAD NO ISSUES WITH MPI, BUT WHEN I STARTED Mounting AN EXTERNAL CONFIG FILE I HAD ISSUES
+The project did not face issues with MPI integration. However, mounting an external configuration file (`disease_in.ini`) posed significant challenges.
 
 # THANK YOU
